@@ -182,7 +182,7 @@ $.extend(UI, {
 
             $(".percentuage", segment).attr("title", '' + perc_t + "Created by " + d.data.matches[0].created_by);
             var match = d.data.matches[0].match;
-            var is_IA = ( d.data.matches[0].created_by == artificialIntelligenceLabel);
+            var is_IA = ( d.data.matches[0].last_updated_by == artificialIntelligenceLabel);
             var segment_id = segment.attr('id');
             $(segment).addClass('loaded');
             $('.sub-editor.matches .overflow', segment).empty();
@@ -192,7 +192,7 @@ $.extend(UI, {
                 if ((this.segment === '') || (this.translation === '')) return;
 
                 var disabled = (this.id == '0') ? true : false;
-                var cb = this.created_by;
+                var cb = this.last_updated_by;
                 var isArtificialIntelligence = (cb == artificialIntelligenceLabel);
                 var percentOriginalText = this.original_match || null;
 
