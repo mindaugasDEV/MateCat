@@ -302,7 +302,19 @@ class getContributionController extends ajaxController {
         foreach ( $matches as &$match ) {
 
             if ( strpos( $match[ 'created_by' ], 'MT' ) !== false ) {
-                $match[ 'match' ] = 'MT';
+
+                if ( $match[ 'last_updated_by' ] == "Artificial Intelligence" ){
+
+                    $match[ 'match' ] = 'MT+';
+
+                } else {
+
+                    $match[ 'match' ] = 'MT';
+                    $match[ 'last_updated_by' ] = "MT";
+
+                }
+
+                $match[ 'created_by' ] = 'MT';
 
                 $QA = new PostProcess( $match[ 'raw_segment' ], $match[ 'raw_translation' ] );
                 $QA->realignMTSpaces();
@@ -315,9 +327,7 @@ class getContributionController extends ajaxController {
                 } else {
                     Log::doLog( $QA->getErrors() );
                 }
-            }
-            if ( $match[ 'created_by' ] == 'MT!' ) {
-                $match[ 'created_by' ] = 'MT'; //MyMemory returns MT!
+
             } else {
 
                 $uid = null;
