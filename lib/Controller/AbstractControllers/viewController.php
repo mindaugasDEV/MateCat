@@ -299,11 +299,16 @@ abstract class viewController extends controller {
      */
     public function finalize() {
 
+        $this->setInitialTemplateVars();
+
         /**
          * Call child for template vars fill
          *
          */
         $this->setTemplateVars();
+
+        $featureSet = new FeatureSet();
+        $featureSet->run('appendDecorators', $this, $this->template);
 
         $this->setTemplateFinalVars();
 
@@ -333,6 +338,18 @@ abstract class viewController extends controller {
 
 
     /**
+     * setInitialTemplateVars
+     *
+     * Initialize template variables that must be initialized to avoid templte errors.
+     * These variables are expected to be overridden.
+     */
+    private function setInitialTemplateVars() {
+        $this->template->footer_js = array();
+        $this->template->config_js = array() ;
+        $this->template->css_resources = array();
+    }
+
+    /**
      * setTemplateFinalVars
      *
      * Here you have the possiblity to set additional template variables that you always want available in the
@@ -342,7 +359,7 @@ abstract class viewController extends controller {
         $this->template->logged_user   = $this->logged_user->shortName() ;
         $this->template->extended_user = $this->logged_user->fullName() ;
 
-        $this->template->isLoggedIn    = $this->isLoggedIn();                       // used in template
+        $this->template->isLoggedIn    = $this->isLoggedIn();
         $this->template->userMail      = $this->logged_user->getEmail() ;
     }
 

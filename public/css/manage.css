@@ -726,6 +726,15 @@ color: #666;
 padding-right: 20px;
         }
 
+        .api .menu ul {
+    padding-left: 30px;
+}
+
+.api .menu a {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
         .api dd {
             margin-left:120px;
         }
@@ -771,7 +780,7 @@ background: #efefef;
 			line-height:30px;
         }
 		
-		.api .block:last-child {height: 20px;
+		.api .block:last-child {
 min-height: 20px;}
 
 .fileformat th {
@@ -802,12 +811,9 @@ width: 13%;}
 
 
 .menu a.active {
-    color: #ccc;
+    font-weight: bold;
 }
 
-.menu .selected a{
-   font-weight:bold;
-}
 
 .api dd {
 margin-left: 120px;
