@@ -306,6 +306,7 @@ class getContributionController extends ajaxController {
                 if ( $match[ 'last_updated_by' ] == "Artificial Intelligence" ){
 
                     $match[ 'match' ] = 'MT+';
+                    $match[ 'original_match' ] = 'MT';
 
                 } else {
 
