@@ -951,7 +951,7 @@ UI = {
 		}
 
 		switch (true) {
-			case (match == 100 && isIA):
+			case (match > 0 && isIA):
 				percentageClass = "per-blue";
 				break;
             case (match == 100):
@@ -963,12 +963,13 @@ UI = {
 			case(match > 0 && match <= 99):
 				percentageClass = "per-orange";
 				break;
+            case (match == "MT" && isIA):
+                percentageClass = "per-blue";
+                break;
 			case (match == "MT"):
 				percentageClass = "per-yellow";
 				break;
-            case (match == "MT+"):
-				percentageClass = "per-blue";
-				break;
+
 			default :
 				percentageClass = "";
 		}
