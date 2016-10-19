@@ -307,7 +307,7 @@ class getContributionController extends ajaxController {
 
                     $match[ 'match' ] = 'MT';
                     $match[ 'original_match' ] = 'MT';
-
+                    $match[ 'last_updated_by' ] = "MT";
                 } else {
 
                     $match[ 'match' ] = 'MT';
