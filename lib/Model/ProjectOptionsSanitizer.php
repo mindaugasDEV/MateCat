@@ -47,10 +47,16 @@ class ProjectOptionsSanitizer {
         $this->source_lang = $source ; 
         $this->target_lang = $target ; 
     }
-    
+
+    /**
+     * This method populates an array of sanitized input options. Known keys are sanitized.
+     * Unknown keys are let as they are and copied to the sanitized array.
+     *
+     * @return array
+     */
     public function sanitize() {
-        $this->sanitized = array(); 
-        
+        $this->sanitized = $this->options ;
+
         if ( isset( $this->options['speech2text'] ) ) {
             $this->sanitizeSpeech2Text() ;
         }
@@ -84,8 +90,15 @@ class ProjectOptionsSanitizer {
 
     private function sanitizeSegmentationRule() {
         $rules = array( 'patent' );
-        if ( array_search( @$this->options[ 'segmentation_rule' ], $rules ) !== false ) {
-            $this->sanitized[ 'segmentation_rule' ] = $this->options[ 'segmentation_rule' ];
+
+        if (
+            array_key_exists('segmentation_rule', $this->options ) &&
+            in_array( $this->options['segmentation_rule'], $rules )
+        ) {
+            $this->sanitized['segmentation_rule'] = $this->options['segmentation_rule'];
+        }
+        else {
+            unset( $this->sanitized['segmentation_rule'] );
         }
     }
 
@@ -122,6 +135,8 @@ class ProjectOptionsSanitizer {
     }
 
     private function checkSourceAndTargetAreInCombination( $langs ) {
+        $this->__ensureLanguagesAreSet();
+
         $all_langs = array_merge( $this->target_lang, array($this->source_lang) );
 
         $all_langs = array_unique( $all_langs ) ;
@@ -131,6 +146,8 @@ class ProjectOptionsSanitizer {
     }
 
     private function checkSourceAndTargetAreInCombinationForTagProjection( $langs ) {
+        $this->__ensureLanguagesAreSet();
+
         $lang_combination = array();
         $found = false;
         foreach ($this->target_lang as $value) {
@@ -145,6 +162,12 @@ class ProjectOptionsSanitizer {
             }
         }
         return $found ;
+    }
+
+    private function __ensureLanguagesAreSet() {
+        if (is_null( $this->target_lang ) || is_null( $this->source_lang ) ) {
+            throw  new Exception('Trying to sanitize options, but languages are not set') ;
+        }
     }
 
 }
