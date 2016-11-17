@@ -129,9 +129,8 @@ class ReviewImproved extends BaseFeature {
             $this->setQaModelFromJsonFile( $projectStructure );
         }
 
-        foreach( $projectStructure['array_jobs']['job_list'] as $id_job ) {
-            $this->createQaChunkReviewRecord( $id_job, $projectStructure );
-        }
+        $id_job = $projectStructure['array_jobs']['job_list'][0];
+        $this->createQaChunkReviewRecord( $id_job, $projectStructure );
     }
 
     /**
@@ -140,7 +139,7 @@ class ReviewImproved extends BaseFeature {
      * Deletes the previously created record and creates the new records matching the new chunks.
      */
     public function postJobSplitted(\ArrayObject $projectStructure) {
-        $id_job = $projectStructure['job_to_split'];
+        $id_job = $projectStructure['array_jobs']['job_list'][0] ;
         $old_reviews = ChunkReviewDao::findByIdJob( $id_job );
         $first_password = $old_reviews[0]->review_password ;
 
