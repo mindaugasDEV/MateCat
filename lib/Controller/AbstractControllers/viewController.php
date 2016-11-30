@@ -174,6 +174,8 @@ abstract class viewController extends controller {
             $this->doAuth();
         }
 
+        ( new FeatureSet() )->run('viewControllerInit', $this);
+
     }
 
     /**
