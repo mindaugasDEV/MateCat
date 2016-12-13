@@ -102,17 +102,9 @@
     <div class="cl"></div>
 </header>
 
+<div metal:use-macro="${upload_partials_path}/claim"></div>
 
-<div class="wrapper-claim">
-    <h1 tal:condition="true:conversion_enabled">Join the Evolution</h1>
-
-    <h1 tal:condition="not:conversion_enabled">Join the Evolution</h1>
-
-    <h2 class="payoff">The CAT tool that works for you</h2>
-</div>
 <div class="wrapper-upload">
-
-
 <div class="translate-box">
     <h2>Project name</h2>
     <input name="project-name" tal:attributes="value project_name|nothing" type="text" class="upload-input" id="project-name" autofocus="autofocus"/>

@@ -1,3 +1,9 @@
+<div class="wrapper-claim" metal:define-macro="claim">
+    <h1 tal:condition="true:conversion_enabled">Join the Evolution</h1>
+    <h1 tal:condition="not:conversion_enabled">Join the Evolution</h1>
+    <h2 class="payoff">The CAT tool that works for you</h2>
+</div>
+
 <div id="gdrive-files-list" metal:define-macro="gdrive_files">
 
     <div class="gdrive-upload-files drag uploaded">
